@@ -96,4 +96,4 @@ def predict():
     return jsonify({"result": result_text})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

@@ -74,15 +74,15 @@ cd amazonreviews/versions
 python app.py
 ```
 
-Open http://127.0.0.1:5000/, type a review and click Analyze. The page sends `{"review": "..."}` to `POST /predict` and shows the returned label; input that is not detected as English is rejected. Start the app from `amazonreviews/versions`, because it loads the model files by relative path. It runs Flask's development server in debug mode, which is meant for local use only.
+Open http://127.0.0.1:5000/, type a review and click Analyze. The page sends `{"review": "..."}` to `POST /predict` and shows the returned label; input that is not detected as English is rejected. Start the app from `amazonreviews/versions`, because it loads the model files by relative path. It runs Flask's development server, which is meant for local use only.
 
 ### Reproduce the pipeline
 
 Download the dataset from Kaggle (decompress the files if they come as `.bz2`), then put `train.ft.txt` in `amazonreviews/versions/train.ft.txt/` and `test.ft.txt` in `amazonreviews/versions/test.ft.txt/`, replacing the placeholder text files. Run the notebooks in this order:
 
-1. `train.ft.txt/1) ceatingDataFrame.ipynb`: parse the raw file into `trainDataFrame.csv`
+1. `train.ft.txt/1) creatingDataFrame.ipynb`: parse the raw file into `trainDataFrame.csv`
 2. `train.ft.txt/2) preprocessLanguageFilter.ipynb`: detect the language of each review
-3. `train.ft.txt/3) textPreprocessingAndFeatureEngineering.ipynb.ipynb`: keep English, clean, lemmatize, add features, plot word counts
+3. `train.ft.txt/3) textPreprocessingAndFeatureEngineering.ipynb`: keep English, clean, lemmatize, add features, plot word counts
 4. `train.ft.txt/4) vectorization.ipynb`: fit TF-IDF and save the vectorizer and the feature matrix
 5. `train.ft.txt/5) visualizeTop10.ipynb` (optional): top 10 features correlated with the label
 6. `test.ft.txt/samePipelineOnTesting.ipynb`: the same steps for the test set
@@ -111,7 +111,7 @@ amazonreviews/
     test.ft.txt/                test-set notebook and feature names
 ```
 
-Saved models: `linear_svc_l2_model.joblib` (used by the app), `logistic_regression_l2_model.joblib`, `best_ridge_classifier_model.joblib`, `best_multinomial_nb_model.joblib`, and `svd_transformer.joblib` (TruncatedSVD for the Random Forest). `ridge_classifier_model.joblib`, `multinomial_nb_model.joblib` and `svd_transformer_cv.joblib` are not used by the notebooks or the app; `svd_transformer_cv.joblib` is an identical copy of `svd_transformer.joblib`.
+Saved models: `linear_svc_l2_model.joblib` (used by the app), `logistic_regression_l2_model.joblib`, `best_ridge_classifier_model.joblib`, `best_multinomial_nb_model.joblib`, and `svd_transformer.joblib` (TruncatedSVD for the Random Forest).
 
 ## Author
 
